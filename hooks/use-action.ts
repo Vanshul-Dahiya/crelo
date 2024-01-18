@@ -35,9 +35,9 @@ export const useAction = <TInput, TOutput>(
         const res = await action(input);
         if (!res) return;
 
-        if (res.fieldErrors) {
-          setFieldErrors(res.fieldErrors);
-        }
+        // always update fieldErrors .. regardless if they exist or not
+        setFieldErrors(res.fieldErrors);
+
         if (res.error) {
           setError(res.error);
           options.onError?.(res.error);
