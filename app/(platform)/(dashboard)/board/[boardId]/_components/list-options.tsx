@@ -1,5 +1,6 @@
 "use client"
 
+import { copyList } from "@/actions/copy-list";
 import { deleteList } from "@/actions/delete-list";
 import { FormSubmit } from "@/components/form/form-submit";
 import { Button } from "@/components/ui/button";
@@ -30,10 +31,26 @@ export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
         }
     })
 
+    const { execute: executeCopy } = useAction(copyList, {
+        onSuccess: (data) => {
+            toast.success(`Copied "${data.title}" List`)
+            closeRef.current?.click()
+        },
+        onError: (error) => {
+            toast.error(error)
+        }
+    })
+
     const onDelete = (formData: FormData) => {
         const id = formData.get("id") as string
         const boardId = formData.get("boardId") as string
         executeDelete({ id, boardId })
+    }
+
+    const onCopy = (formData: FormData) => {
+        const id = formData.get("id") as string
+        const boardId = formData.get("boardId") as string
+        executeCopy({ id, boardId })
     }
 
 
@@ -56,7 +73,7 @@ export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
                 <Button onClick={onAddCard} className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm" variant={"ghost"}>
                     Add card..
                 </Button>
-                <form action="">
+                <form action={onCopy}>
                     <input type="hidden" name="id" id="id" value={data.id} />
                     <input type="hidden" name="boardId" id="boardId" value={data.boardId} />
                     <FormSubmit variant="ghost" className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm">
