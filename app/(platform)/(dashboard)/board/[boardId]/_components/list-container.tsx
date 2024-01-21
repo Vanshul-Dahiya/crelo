@@ -5,6 +5,10 @@ import { ListForm } from "./list-form";
 import { useEffect, useState } from "react";
 import { ListItem } from "./list-item";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd"
+import { useAction } from "@/hooks/use-action";
+import { updateListOrder } from "@/actions/update-list-order";
+import { toast } from "sonner";
+import { updateCardOrder } from "@/actions/update-card-order";
 
 interface ListContainerProps {
     data: ListWithCards[];
@@ -21,6 +25,25 @@ function reorder<T>(list: T[], startIndex: number, endIndex: number) {
 export const ListContainer = ({ data, boardId }: ListContainerProps) => {
     // update data in real time for drag and drop
     const [orderedData, setOrderedData] = useState(data)
+
+    const { execute: executeUpdateListOrder } = useAction(updateListOrder, {
+        onSuccess: () => {
+            toast.success("List reordered!")
+        },
+        onError: (err) => {
+            toast.error(err)
+        }
+    })
+
+    const { execute: executeUpdateCardOrder } = useAction(updateCardOrder, {
+        onSuccess: () => {
+            toast.success("Card reordered!")
+        },
+        onError: (err) => {
+            toast.error(err)
+        }
+    })
+
     useEffect(() => {
         setOrderedData(data)
     }, [data])
@@ -47,7 +70,9 @@ export const ListContainer = ({ data, boardId }: ListContainerProps) => {
             ).map((item, index) => ({ ...item, order: index }))
 
             setOrderedData(items)
+
             // trigger server actions
+            executeUpdateListOrder({ items, boardId })
 
         }
 
@@ -88,6 +113,9 @@ export const ListContainer = ({ data, boardId }: ListContainerProps) => {
                 sourceList.cards = reorderedCards
 
                 setOrderedData(newOrderData)
+
+                executeUpdateCardOrder({ boardId: boardId, items: reorderedCards })
+
             } else {
                 // user moves card to another elise
                 // remove card from source list
@@ -110,10 +138,9 @@ export const ListContainer = ({ data, boardId }: ListContainerProps) => {
 
                 setOrderedData(newOrderData)
 
+                executeUpdateCardOrder({ boardId: boardId, items: destList.cards })
 
             }
-
-
         }
     }
 
