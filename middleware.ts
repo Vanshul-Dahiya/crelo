@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 // See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your Middleware
 export default authMiddleware({
   // allow users to visit landing page without ever signing in
-  publicRoutes: ["/"],
+  publicRoutes: ["/", "/api/webhook"],
   afterAuth(auth, req) {
     // if we are logged in and we are on landing page -> redirect
     if (auth.userId && auth.isPublicRoute) {
