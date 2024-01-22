@@ -1,5 +1,7 @@
 # Crelo - Trello Clone
 
+![image](https://github.com/Vanshul-Dahiya/crelo/assets/97304314/80491bcf-8837-46eb-9c8e-c2c7a3d097b7)
+
 **Live Demo:** [Crelo](https://crelo.vercel.app/)
 
 ## Overview
@@ -39,9 +41,6 @@ To learn more about Next.js, check out the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 - [Next.js GitHub Repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the Vercel Platform from the creators of Next.js. Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 ## Prerequisites
 
@@ -51,11 +50,14 @@ The easiest way to deploy your Next.js app is to use the Vercel Platform from th
 
 ```bash
 git clone https://github.com/vanshul-dahiya/crelo.git
-
+```
+## Install packages
+```bash
 npm install
+```
 
-# Setting up .env file
-
+## Setting up .env file
+```
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=
@@ -72,10 +74,14 @@ STRIPE_API_KEY=
 NEXT_PUBLIC_APP_URL=
 
 STRIPE_WEBHOOK_SECRET=
+```
+## Setup Prisma
 
-
+```
 npx prisma generate
 npx prisma db push
-
-
+```
+## Run the App
+```
 npm run dev
+```
