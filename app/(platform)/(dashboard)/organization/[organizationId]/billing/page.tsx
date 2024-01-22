@@ -5,7 +5,6 @@ import SubscriptionButton from "./_components/subscription-button"
 
 const BillingPage = async () => {
     const isPro = await checkSubscription()
-    console.log({ isPro })
     return (
         <div className="w-full">
             <Info isPro={isPro} />

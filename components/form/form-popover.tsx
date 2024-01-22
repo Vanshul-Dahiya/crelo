@@ -34,8 +34,6 @@ export const FormPopover = ({
     sideOffset = 0
 }: FormPopoverProps) => {
 
-    const proModal = useProModal()
-
     const router = useRouter()
 
     const closeRef = useRef<ElementRef<"button">>(null)
@@ -48,7 +46,6 @@ export const FormPopover = ({
         },
         onError: (err) => {
             toast.error(err)
-            proModal.onOpen()
         }
     })
     const onSubmit = (formData: FormData) => {

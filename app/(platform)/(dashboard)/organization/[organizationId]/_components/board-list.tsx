@@ -28,7 +28,6 @@ export const BoardList = async () => {
     })
 
     const availableCount = await getAvailableCount()
-    const isPro = await checkSubscription()
 
     return (
         <div className="space-y-4">
@@ -55,11 +54,11 @@ export const BoardList = async () => {
                     <div role="button" className="aspect-video relative h-full w-full bg-muted rounded-sm flex flex-col gap-y-1 items-center justify-center hover:opacity-75 transition">
                         <p className="text-sm">Create New Board</p>
                         <span className="text-xs">
-                            {isPro ? "Unlimited" : `${MAX_FREE_BOARDS - availableCount} remaining!`}
+                            {`${MAX_FREE_BOARDS - availableCount} remaining!`}
                         </span>
                         <Hint
                             sideOffset={40}
-                            description={` Free WorkSpaces can have up to 5 open boards. For unlimited boards upgrade this workspace.`}
+                            description={` Free WorkSpaces can have up to ${MAX_FREE_BOARDS - availableCount} open boards.`}
                         >
                             <HelpCircle className="absolute bottom-2 right-2  h-[14px] w-[14px]" />
                         </Hint>

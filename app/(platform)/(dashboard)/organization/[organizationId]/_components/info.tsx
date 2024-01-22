@@ -33,7 +33,7 @@ export const Info = ({isPro}:InfoProps) => {
                     {organization?.name}
                 </p>
                 <div className="flex items-center text-xs text-muted-foreground">
-                    <CreditCard className="h-3 w-3 mr-1" /> {isPro ? "Pro" : "Free" }
+                    <CreditCard className="h-3 w-3 mr-1" /> Free
                 </div>
             </div>
         </div>
