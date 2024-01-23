@@ -50,7 +50,7 @@ export const BoardList = async () => {
                     ))
                 }
 
-                <FormPopover side="right" sideOffset={10}>
+                <FormPopover side="top" sideOffset={-100} align="center">
                     <div role="button" className="aspect-video relative h-full w-full bg-muted rounded-sm flex flex-col gap-y-1 items-center justify-center hover:opacity-75 transition">
                         <p className="text-sm">Create New Board</p>
                         <span className="text-xs">
